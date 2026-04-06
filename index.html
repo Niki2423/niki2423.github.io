@@ -4,198 +4,1010 @@
   <meta charset="UTF-8">
   <title>Senior Design Project Website</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <style>
+    :root {
+      --bg: #eef6f8;
+      --surface: rgba(255, 255, 255, 0.9);
+      --surface-strong: #ffffff;
+      --surface-soft: rgba(242, 250, 252, 0.88);
+      --text: #1b2d3a;
+      --muted: #607889;
+      --line: rgba(27, 45, 58, 0.1);
+      --brand: #1b8fa8;
+      --brand-deep: #12384c;
+      --accent: #4fb3c8;
+      --accent-soft: rgba(79, 179, 200, 0.14);
+      --shadow: 0 28px 80px rgba(17, 58, 76, 0.12);
+      --shadow-soft: 0 16px 40px rgba(27, 45, 58, 0.08);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f6f9;
       margin: 0;
-      padding: 0;
-      color: #333;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(27, 143, 168, 0.14), transparent 34%),
+        radial-gradient(circle at top right, rgba(79, 179, 200, 0.12), transparent 28%),
+        linear-gradient(180deg, #f8fcfd 0%, var(--bg) 100%);
+      line-height: 1.6;
     }
 
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 20px;
-      text-align: center;
+    p {
+      color: inherit;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.2em;
+    a {
+      color: inherit;
     }
 
-    .info {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 20px;
+    .page-shell {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
     }
 
-    .info table {
+    .topbar {
+      padding: 22px 0 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 999px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #58b8cc, var(--brand-deep));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      flex-shrink: 0;
+    }
+
+    .brand-mark img {
       width: 100%;
-      border-collapse: collapse;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .info td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
+    .topbar nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .section-title {
-      text-align: center;
-      margin: 50px 0 20px;
-      font-size: 1.8em;
-      color: #2c3e50;
+    .topbar nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .topbar nav a:hover {
+      background: rgba(27, 143, 168, 0.08);
+      color: var(--brand-deep);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 22px 0 30px;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(18, 56, 76, 0.98), rgba(27, 143, 168, 0.92));
+      color: #f8fafc;
+      border-radius: var(--radius-xl);
+      padding: 52px;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-panel::before,
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      z-index: -1;
+      opacity: 0.7;
+    }
+
+    .hero-panel::before {
+      width: 280px;
+      height: 280px;
+      top: -120px;
+      right: -40px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 68%);
+    }
+
+    .hero-panel::after {
+      width: 220px;
+      height: 220px;
+      bottom: -100px;
+      left: -30px;
+      background: radial-gradient(circle, rgba(125, 211, 252, 0.2), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.85fr);
+      gap: 30px;
+      align-items: end;
+      margin-top: 22px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 5vw, 4.9rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      max-width: 9ch;
+    }
+
+    .hero-copy p {
+      margin: 18px 0 0;
+      max-width: 58ch;
+      font-size: 1.06rem;
+      color: rgba(248, 250, 252, 0.84);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 152px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-button.primary {
+      background: #f7fcfe;
+      color: var(--brand-deep);
+    }
+
+    .hero-button.secondary {
+      background: transparent;
+      color: #f8fafc;
+      border: 1px solid rgba(248, 250, 252, 0.26);
+    }
+
+    .hero-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 0.83rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(248, 250, 252, 0.72);
+      margin-bottom: 6px;
+    }
+
+    .stat-card span {
+      font-size: 1.03rem;
+      font-weight: 600;
+    }
+
+    main {
+      padding-bottom: 48px;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 0 0 22px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      color: var(--brand-deep);
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      backdrop-filter: blur(12px);
+    }
+
+    .panel h3 {
+      margin: 0 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.5rem;
+      color: var(--brand-deep);
+    }
+
+    .details-grid,
+    .people-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .detail-label {
+      font-weight: 700;
+      color: var(--brand-deep);
+    }
+
+    .person {
+      position: relative;
+      padding: 16px 18px 16px 22px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(251, 248, 243, 0.9));
+      border: 1px solid rgba(16, 63, 69, 0.08);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .person::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #58b8cc, var(--brand));
+    }
+
+    .person strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .panel p,
+    .person p,
+    .detail-row div,
+    .footer-panel p {
+      color: var(--text);
+    }
+
+    .person a,
+    .footer-links a {
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .person a:hover,
+    .footer-links a:hover,
+    .link-chip:hover,
+    .hero-button:hover {
+      text-decoration: none;
+    }
+
+    .milestone-section {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.28));
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .milestone-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(27, 143, 168, 0.05), transparent 42%, rgba(79, 179, 200, 0.04));
+      pointer-events: none;
+    }
+
+    .semester-block + .semester-block {
+      margin-top: 28px;
+    }
+
+    .semester-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .semester-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--brand-deep);
+    }
+
+    .semester-title::before {
+      content: "";
+      width: 54px;
+      height: 2px;
+      background: linear-gradient(90deg, #7fd4e2, transparent);
+    }
+
+    .semester-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .milestones {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      max-width: 1100px;
-      margin: auto;
-      padding: 0 20px;
     }
 
     .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 235px;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 22px 44px rgba(29, 42, 51, 0.08);
+      border: 1px solid rgba(16, 63, 69, 0.08);
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .card::before {
+      content: "";
+      width: 58px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #58b8cc, #9cdef0);
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      transform: translateY(-7px);
+      box-shadow: 0 26px 48px rgba(29, 42, 51, 0.12);
+      border-color: rgba(12, 108, 103, 0.2);
+    }
+
+    .card-meta {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(12, 108, 103, 0.08);
+      color: var(--brand);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .card h3 {
-      margin-top: 0;
-      color: #34495e;
+      margin: 0;
+      font-size: 1.24rem;
+      color: var(--brand-deep);
     }
 
-    .links a {
-      display: inline-block;
-      margin: 5px 8px 0 0;
-      padding: 6px 12px;
-      border-radius: 6px;
-      background: #3498db;
-      color: white;
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .link-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
       text-decoration: none;
-      font-size: 0.9em;
-      transition: background 0.2s ease;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--brand-deep);
+      background: rgba(12, 108, 103, 0.1);
+      border: 1px solid rgba(12, 108, 103, 0.12);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
-    .links a:hover {
-      background: #2980b9;
+    .link-chip:hover {
+      transform: translateY(-1px);
+      background: rgba(12, 108, 103, 0.16);
+      border-color: rgba(12, 108, 103, 0.22);
     }
 
     footer {
-      text-align: center;
-      padding: 20px;
-      background: #2c3e50;
-      color: white;
-      margin-top: 40px;
+      padding: 8px 0 48px;
     }
 
-    footer a {
-      color: #ecf0f1;
-      text-decoration: underline;
+    .footer-panel {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      background: rgba(16, 63, 69, 0.08);
+      border: 1px solid rgba(16, 63, 69, 0.1);
+      border-radius: 24px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .footer-panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: flex-end;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-panel,
+    .panel,
+    .milestone-section,
+    .card,
+    .footer-panel {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.06s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.12s;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: 0.18s;
+    }
+
+    @media (max-width: 900px) {
+      .topbar-inner,
+      .section-header,
+      .semester-heading,
+      .footer-panel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-panel {
+        padding: 34px 24px;
+        border-radius: 28px;
+      }
+
+      .hero-grid,
+      .overview {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell {
+        width: min(var(--max-width), calc(100% - 20px));
+      }
+
+      .topbar {
+        padding-top: 14px;
+      }
+
+      .topbar-inner {
+        border-radius: 24px;
+      }
+
+      .topbar nav {
+        width: 100%;
+      }
+
+      .hero {
+        padding-top: 18px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .panel,
+      .card,
+      .milestone-section {
+        padding: 20px;
+      }
+
+      .detail-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .hero-button {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f171c;
+        --surface: rgba(22, 31, 39, 0.94);
+        --surface-strong: #18222b;
+        --surface-soft: rgba(24, 34, 43, 0.92);
+        --text: #edf3f6;
+        --muted: #bfd0d7;
+        --line: rgba(237, 243, 246, 0.12);
+        --brand: #67d5cb;
+        --brand-deep: #f4f8fa;
+        --accent: #f0b06c;
+        --accent-soft: rgba(240, 176, 108, 0.16);
+        --shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+        --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.28);
+      }
+
+      body {
+        background:
+          radial-gradient(circle at top left, rgba(103, 213, 203, 0.12), transparent 34%),
+          radial-gradient(circle at top right, rgba(240, 176, 108, 0.12), transparent 28%),
+          linear-gradient(180deg, #0d1418 0%, #101a1f 100%);
+      }
+
+      .topbar-inner,
+      .panel,
+      .milestone-section,
+      .card,
+      .footer-panel,
+      .person {
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .topbar-inner {
+        background: rgba(22, 31, 39, 0.86);
+      }
+
+      .panel,
+      .milestone-section,
+      .footer-panel {
+        background: rgba(22, 31, 39, 0.92);
+      }
+
+      .person,
+      .card {
+        background: rgba(24, 34, 43, 0.96);
+      }
+
+      .topbar nav a {
+        color: var(--muted);
+      }
+
+      .topbar nav a:hover {
+        background: rgba(103, 213, 203, 0.12);
+        color: #ffffff;
+      }
+
+      .section-kicker,
+      .semester-pill,
+      .card-meta {
+        color: var(--accent);
+      }
+
+      .card-meta,
+      .semester-pill {
+        background: rgba(240, 176, 108, 0.14);
+      }
+
+      .link-chip {
+        color: #f4f8fa;
+        background: rgba(103, 213, 203, 0.12);
+        border-color: rgba(103, 213, 203, 0.18);
+      }
+
+      .link-chip:hover {
+        background: rgba(103, 213, 203, 0.18);
+        border-color: rgba(103, 213, 203, 0.28);
+      }
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>Skin Cancer Detection</h1>
-    <p>Senior Design Project</p>
+  <header class="topbar">
+    <div class="page-shell">
+      <div class="topbar-inner">
+        <div class="brand-lockup">
+          <div class="brand-mark">
+            <img src="files/logo.jpg" alt="Skin Cancer Detection logo">
+          </div>
+          <span>Skin Cancer Detection</span>
+        </div>
+        <nav>
+          <a href="#overview">Overview</a>
+          <a href="#milestones">Milestones</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <section class="info">
-    <table>
-      <tr><td><strong>Project Name</strong></td><td>Skin Cancer Detection</td></tr>
-      <tr><td><strong>Team Members & Emails</strong></td><td></p>Nikiraj Konwar <a href="mailto:nkonwar2020@my.fit.edu"> (nkonwar2020@my.fit.edu)</a>,<br>  Nicolas Rincon-Speranza <a href="mailto:nkonwar2020@my.fit.edu"> (nrinconspera2022@my.fit.edu)</a>, <br>Lawson Darrow<a href="mailto:nkonwar2020@my.fit.edu">(ldarrow2023@my.fit.edu)</a>, <br>Christian Stevens <a href="mailto:nkonwar2020@my.fit.edu">(cstevens2023@my.fit.edu)</a></td></tr>
-      <tr><td><strong>Faculty Advisor</strong></td><td>Dr. Zahra Nematzadeh<a href="mailto:znematzadeh@fit.edu"> (znematzadeh@fit.edu)</a></td></tr>
-    </table>
+  <section class="hero">
+    <div class="page-shell">
+      <div class="hero-panel">
+        <span class="eyebrow">Senior Design Project</span>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>Skin Cancer Detection</h1>
+            <p>
+              A senior design project website presenting the team, advisor information,
+              milestone documents, evaluations, presentations, and final deliverables for a
+              privacy-conscious mobile screening app focused on early skin lesion assessment.
+            </p>
+            <div class="hero-actions">
+              <a class="hero-button primary" href="#milestones">View Milestones</a>
+              <a class="hero-button secondary" href="#overview">Project Overview</a>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>Medical Focus</strong>
+              <span>Early skin lesion risk screening</span>
+            </div>
+            <div class="stat-card">
+              <strong>App Approach</strong>
+              <span>On-device AI-assisted analysis</span>
+            </div>
+            <div class="stat-card">
+              <strong>Project Archive</strong>
+              <span>Two semesters of design and evaluation milestones</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <h2 class="section-title">First Semester</h2>
-  <div class="milestones">
-    <div class="card">
-      <h3>Plan (Sep 3)</h3>
-      <div class="links">
-        <a href="files/Plan.docx" target="_blank">Plan</a>
-        <a href="files/Presentation.pdf" target="_blank">Presentation</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Milestone 1 (Sep 29)</h3>
-      <div class="links">
-        <a href="files/Requirement.pdf" target="_blank">Requirement</a>
-        <a href="files/Design.pdf" target="_blank">Design</a>
-        <a href="files/Test.pdf" target="_blank">Test</a>
-        <a href="files/M1_Presentation.pptx" target="_blank">Presentation</a>
-        <a href="files/M1_Evaluation.pdf" target="_blank">Progress Eval</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Milestone 2 (Oct 27)</h3>
-      <div class="links">
-        <a href="files/M2_Presentation.pptx" target="_blank">Presentation</a>
-        <a href="files/M2_Evaluation.docx" target="_blank">Progress Eval</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Milestone 3 (Nov 24)</h3>
-      <div class="links">
-        <a href="files/M3_Presentation.pptx" target="_blank">Presentation</a>
-        <a href="files/M3_Evaluation.docx" target="_blank">Progress Eval</a>
-      </div>
-    </div>
-  </div>
+  <main class="page-shell">
+    <section class="section overview" id="overview">
+      <article class="panel">
+        <span class="section-kicker">Project Details</span>
+        <h3>Project Overview</h3>
+        <p>
+          The Skin Cancer Detection app is a mobile application that allows users to capture or
+          upload images of suspicious skin lesions and receive a real-time, AI-assisted preliminary
+          risk assessment. Built with machine learning for on-device analysis, the app is designed
+          to support early awareness, protect user privacy, and encourage professional medical
+          consultation when higher-risk results are detected.
+        </p>
+        <div class="details-grid">
+          <div class="detail-row">
+            <div class="detail-label">Project Name</div>
+            <div>Skin Cancer Detection</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Faculty Advisor</div>
+            <div>
+              Dr. Zahra Nematzadeh
+              <a href="mailto:znematzadeh@fit.edu">(znematzadeh@fit.edu)</a>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Project Scope</div>
+            <div>
+              This website organizes milestone documents, evaluations, presentations,
+              and final deliverables across both semesters of the senior design project.
+            </div>
+          </div>
+        </div>
+      </article>
 
-  <h2 class="section-title">Second Semester</h2>
-  <div class="milestones">
-    <div class="card">
-      <h3>Plan (Jan 26)</h3>
-      <div class="links">
-        <a href="files/Plan2.docx" target="_blank">Plan</a>
-        <a href="files/Plan2.pptx" target="_blank">Presentation</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Milestone 4 (Feb 23)</h3>
-      <div class="links">
-        <a href="files/M4_Presentation.pptx" target="_blank">Presentation</a>
-        <a href="files/M4_Evaluation.docx" target="_blank">Progress Eval</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Milestone 5 (Mar 30)</h3>
-      <div class="links">
-        <a href="files/Poster.pdf" target="_blank">Poster</a>
-        <a href="files/M5_Presentation.pptx" target="_blank">Presentation</a>
-        <a href="files/M5_Evaluation.docx" target="_blank">Progress Eval</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Milestone 6 (Apr 20)</h3>
-      <div class="links">
-        <a href="files/User_Manual.docx" target="_blank">User Manual</a>
-        <a href="files/Demo_Video.mp4" target="_blank">Demo Video</a>
-        <a href="files/M6_Presentation.pptx" target="_blank">Presentation</a>
-        <a href="files/M6_Evaluation.docx" target="_blank">Progress Eval</a>
-      </div>
-    </div>
-  </div>
+      <aside class="panel">
+        <span class="section-kicker">Team</span>
+        <h3>Team Members</h3>
+        <div class="people-list">
+          <div class="person">
+            <strong>Nikiraj Konwar</strong>
+            <a href="mailto:nkonwar2020@my.fit.edu">nkonwar2020@my.fit.edu</a>
+          </div>
+          <div class="person">
+            <strong>Nicolas Rincon-Speranza</strong>
+            <a href="mailto:nrinconspera2022@my.fit.edu">nrinconspera2022@my.fit.edu</a>
+          </div>
+          <div class="person">
+            <strong>Lawson Darrow</strong>
+            <a href="mailto:ldarrow2023@my.fit.edu">ldarrow2023@my.fit.edu</a>
+          </div>
+          <div class="person">
+            <strong>Christian Stevens</strong>
+            <a href="mailto:cstevens2023@my.fit.edu">cstevens2023@my.fit.edu</a>
+          </div>
+        </div>
+      </aside>
+    </section>
 
-  <footer>
-    <p>Contact the team: <a href="email"> email </a></p>
+    <section class="section" id="milestones">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Deliverables</span>
+          <h2>Project Milestones</h2>
+        </div>
+        <p>
+          The original milestone content is preserved while the presentation is upgraded to feel more
+          organized, polished, and suitable for a professional senior design showcase.
+        </p>
+      </div>
+
+      <div class="semester-block milestone-section">
+        <div class="semester-heading">
+          <h3 class="semester-title">First Semester</h3>
+          <span class="semester-pill">Foundation Phase</span>
+        </div>
+        <div class="milestones">
+          <article class="card">
+            <span class="card-meta">Sep 3</span>
+            <div>
+              <h3>Plan</h3>
+              <p>Initial planning documents and presentation materials for the first semester.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/Plan.docx" target="_blank">Plan</a>
+              <a class="link-chip" href="files/Presentation.pdf" target="_blank">Presentation</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="card-meta">Sep 29</span>
+            <div>
+              <h3>Milestone 1</h3>
+              <p>Requirements, design, testing materials, presentation deck, and progress evaluation.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/Requirement.pdf" target="_blank">Requirement</a>
+              <a class="link-chip" href="files/Design.pdf" target="_blank">Design</a>
+              <a class="link-chip" href="files/Test.pdf" target="_blank">Test</a>
+              <a class="link-chip" href="files/M1_Presentation.pptx" target="_blank">Presentation</a>
+              <a class="link-chip" href="files/M1_Evaluation.pdf" target="_blank">Progress Eval</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="card-meta">Oct 27</span>
+            <div>
+              <h3>Milestone 2</h3>
+              <p>Mid-semester presentation and progress evaluation materials.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/M2_Presentation.pptx" target="_blank">Presentation</a>
+              <a class="link-chip" href="files/M2_Evaluation.docx" target="_blank">Progress Eval</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="card-meta">Nov 24</span>
+            <div>
+              <h3>Milestone 3</h3>
+              <p>Presentation deck and evaluation documents submitted near the end of the semester.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/M3_Presentation.pptx" target="_blank">Presentation</a>
+              <a class="link-chip" href="files/M3_Evaluation.docx" target="_blank">Progress Eval</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="semester-block milestone-section">
+        <div class="semester-heading">
+          <h3 class="semester-title">Second Semester</h3>
+          <span class="semester-pill">Final Delivery</span>
+        </div>
+        <div class="milestones">
+          <article class="card">
+            <span class="card-meta">Jan 26</span>
+            <div>
+              <h3>Plan</h3>
+              <p>Second semester planning materials and presentation deliverables.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/Plan2.docx" target="_blank">Plan</a>
+              <a class="link-chip" href="files/Plan2.pptx" target="_blank">Presentation</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="card-meta">Feb 23</span>
+            <div>
+              <h3>Milestone 4</h3>
+              <p>Presentation and evaluation documents tracking project progress during implementation.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/M4_Presentation.pptx" target="_blank">Presentation</a>
+              <a class="link-chip" href="files/M4_Evaluation.docx" target="_blank">Progress Eval</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="card-meta">Mar 30</span>
+            <div>
+              <h3>Milestone 5</h3>
+              <p>Poster, presentation, and evaluation materials prepared for late-stage review.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/Poster.pdf" target="_blank">Poster</a>
+              <a class="link-chip" href="files/M5_Presentation.pptx" target="_blank">Presentation</a>
+              <a class="link-chip" href="files/M5_Evaluation.docx" target="_blank">Progress Eval</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="card-meta">Apr 20</span>
+            <div>
+              <h3>Milestone 6</h3>
+              <p>Final package including the user manual, demo video, presentation, and progress evaluation.</p>
+            </div>
+            <div class="links">
+              <a class="link-chip" href="files/User_Manual.docx" target="_blank">User Manual</a>
+              <a class="link-chip" href="files/Demo_Video.mp4" target="_blank">Demo Video</a>
+              <a class="link-chip" href="files/M6_Presentation.pptx" target="_blank">Presentation</a>
+              <a class="link-chip" href="files/M6_Evaluation.docx" target="_blank">Progress Eval</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="page-shell">
+      <div class="footer-panel">
+        <p>Contact the project team or faculty advisor for project information and milestone materials.</p>
+        <div class="footer-links">
+          <a href="mailto:znematzadeh@fit.edu">Faculty Advisor</a>
+        </div>
+      </div>
+    </div>
   </footer>
-
 </body>
 </html>
